@@ -3,90 +3,78 @@
 
 // resources and links
 // https://www.techtarget.com/whatis/definition/hexadecimal
+// https://www.youtube.com/watch?v=4EJay-6Bioo -- Khan academy Hexadecimal video
 
-int static lenint(int num)
+int static writestr(char *str)
 {
     int i;
-
-    i = 1;
-    while (num > 0)
-    {
-        num = num / 10;
-        i = i / 10; 
-    }
-    return (i);
-}
-
-
-void static writehex(int num)
-{
-    int i;
-    int rem;
-    int hex;
-    
-    i = 0;
-    while (num > 0)
-    {
-        num = num / 16;
-        rem = num % 16;
-        lenint(rem);
-    }
-}
-
-
-void static writestr(char *str)
-{
-    int i;
+    int write_len;
 
     i = 0;
+    write_len = 0;
     while (str[i] != 0)
     {
-        write(1, &str[i], 1);
+        write_len += write(1, &str[i], 1);
         i++;
     }
+    return (write_len);
 }
 
-void static writechar(char c)
+int static writechar(char c)
 {
-    write(1, &c, 1);
+    return(write(1, &c, 1));
 }
 
-void static writeint(int num)
+int static writeint(int num)
 {
-    num = num + '0';
-    write(1, &num, 1);
+    num += '0';
+    return (write(1, &num, 1));
 }
 
-void static router(char letter, va_list args)
+void static writepercent(void)
 {
-    if (letter == 'd')
-        writeint(va_arg(args, int));
-    if (letter == 'c')
-        writechar(va_arg(args, int));
-    if (letter == 's')
-        writestr(va_arg(args, char *));
-    if (letter == '%')
-        write(1, "%", 1);
-    if (letter == 'x')
-        writehex(va_arg(args, int));
+    write(1, "%", 1);
 }
 
-void    ft_printf(const char *input, ...)
+int static router(char letter, va_list args)
 {
+    int write_len;
+
+    write_len = 0;
+
+    if (letter == 'd' || letter == 'i')
+        write_len += writeint(va_arg(args, int));
+    else if (letter == 'c')
+        write_len += writechar(va_arg(args, int));
+    else if (letter == 's')
+        write_len += writestr(va_arg(args, char *));
+    else if (letter == '%')
+        writepercent();
+
+    return (write_len);
+}
+
+int    ft_printf(const char *input, ...)
+{
+    int i;
+    int write_len;
     va_list args;
     va_start(args, input);
 
-    while (*input != 0)
+    i = 0;
+    write_len = 0;
+    while (input[i])
     {
-        if (*input == '%')
+        if (input[i] == '%')
         {
-            input++;
-            router(*input, args);
-            input++;
+            write_len += router(input[i + 1], args);
+            i++;
         }
-        writechar(*input);
-        input++;
+        else
+            write_len += writechar(input[i]);
+        i++;
     }
-    write(1, "\n", 1);
     va_end(args);
+    write(1, "\n", 1);
+    return (write_len);
 }
