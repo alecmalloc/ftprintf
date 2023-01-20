@@ -25,16 +25,15 @@ int static writechar(char c)
     return(write(1, &c, 1));
 }
 
-int static writelargeint(int num)
+void static writelargeint(int num)
 {
-    int write_len;
     if (num >= 10)
     {
-        write_len += writelargeint(num / 10);
-        num = num % 10;
+        writelargeint(num / 10);
+        writelargeint(num % 10);
     }
-    write_len += writechar(num + '0');
-    return (write_len);
+    else
+        writechar(num + '0');
 }
 
 int static writeint(int num)
@@ -47,15 +46,32 @@ int static writeint(int num)
         num *= -1;
     }
     if (num >= 10) 
-        write_len += writelargeint(num);
+        writelargeint(num);
+    else
+    {
+        num += '0';
+        write_len += write(1, &num, 1);
+    }
+    return (write_len);
+}
+
+int static writeuint(int num)
+{
+    int write_len;
+
+    if (num < 0)
+        num *= -1;
+    if (num >= 10) 
+        writelargeint(num);
     num += '0';
     write_len += write(1, &num, 1);
     return (write_len);
 }
 
-void static writepercent(void)
+int static writepercent(void)
 {
-    write(1, "%", 1);
+    int write_len;
+    return(write(1, "%", 1));
 }
 
 int static router(char letter, va_list args)
@@ -71,7 +87,9 @@ int static router(char letter, va_list args)
     else if (letter == 's')
         write_len += writestr(va_arg(args, char *));
     else if (letter == '%')
-        writepercent();
+        write_len += writepercent();
+    else if (letter == 'u')
+        write_len += writeuint(va_arg(args, int));
 
     return (write_len);
 }
