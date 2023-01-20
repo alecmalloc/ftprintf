@@ -25,10 +25,32 @@ int static writechar(char c)
     return(write(1, &c, 1));
 }
 
+int static writelargeint(int num)
+{
+    int write_len;
+    if (num >= 10)
+    {
+        write_len += writelargeint(num / 10);
+        num = num % 10;
+    }
+    write_len += writechar(num + '0');
+    return (write_len);
+}
+
 int static writeint(int num)
 {
+    int write_len;
+
+    if (num < 0)
+    {
+        write_len += write(1, "-", 1);
+        num *= -1;
+    }
+    if (num >= 10) 
+        write_len += writelargeint(num);
     num += '0';
-    return (write(1, &num, 1));
+    write_len += write(1, &num, 1);
+    return (write_len);
 }
 
 void static writepercent(void)
