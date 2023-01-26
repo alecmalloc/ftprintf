@@ -9,8 +9,9 @@ int writeuint(int num);
 int writeint(int num);
 int writelargeint(int num);
 int writechar(char c);
-// int writestr(char *str);
-// int writehexrouter(int hex, char hextype);
-// int writehex(int hex, char hextype);
+int writestr(char *str);
+int writehexrouter(int hex, char hextype);
+int writehex(int hex, char hextype);
+int ft_printf(const char *input, ...);
 
 #endif
