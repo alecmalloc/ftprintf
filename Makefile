@@ -2,12 +2,12 @@ OBJFILES = writehexs.o writeints.o writepercent.o writetext.o ft_printf.o main.o
 
 all: writehexs writeints writepercent writetext ft_printf main clean
 
-clean: 
+clean:
 	rm -f $(OBJFILES)
 
 main: main.c
 	cc main.c -c
-	cc -o print_app writehexs.o writeints.o writepercent.o writetext.o ft_printf.o main.o 
+	cc -o print_app $(OBJFILES)
 
 ft_printf: ft_printf.c
 	cc ft_printf.c -c
