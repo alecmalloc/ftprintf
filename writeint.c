@@ -36,10 +36,12 @@ int writeuint(int num)
 {
     int write_len;
 
+    write_len = 0;
     if (num < 0)
     {
         num *= -1;
         write_len = 1;
     }
-    return(writeint(num));
+
+    return(writeint(num) + write_len);
 }

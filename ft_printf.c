@@ -23,7 +23,7 @@ int router(char letter, va_list args)
         write_len += writepercent();
     else if (letter == 'u')
         write_len += writeuint(va_arg(args, int));
-    else if (letter == 'x' || letter == 'X')
+    else if (letter == 'x' || letter == 'X' || letter == 'p')
         write_len += writehexrouter(va_arg(args, int), letter);
     return (write_len);
 }

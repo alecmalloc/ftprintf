@@ -1,6 +1,9 @@
-OBJFILES = writehexs.o writeints.o writepercent.o writetext.o ft_printf.o main.o
+OBJFILES = writehex.o writeint.o writepercent.o writetext.o ft_printf.o main.o
 
-all: writehexs writeints writepercent writetext ft_printf main clean
+all: writehex writeint writepercent writetext ft_printf main clean
+
+run: print_app
+	./print_app
 
 clean:
 	rm -f $(OBJFILES)
@@ -12,18 +15,14 @@ main: main.c
 ft_printf: ft_printf.c
 	cc ft_printf.c -c
 
+writehex: writehex.c
+	cc writehex.c -c
 
-writehexs: writehexs.c
-	cc writehexs.c -c
-
-
-writeints: writeints.c
-	cc writeints.c -c
-
+writeint: writeint.c
+	cc writeint.c -c
 
 writepercent: writepercent.c
 	cc writepercent.c -c
-
 
 writetext: writetext.c
 	cc writetext.c -c
