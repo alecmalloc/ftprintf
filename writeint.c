@@ -3,6 +3,8 @@
 int writelargeint(int num)
 {
     int write_len;
+
+    write_len = 0;
     if (num >= 10)
     {
         write_len += writelargeint(num / 10);
@@ -17,13 +19,14 @@ int writeint(int num)
 {
     int write_len;
 
+    write_len = 0;
     if (num < 0)
     {
         write_len += write(1, "-", 1);
         num *= -1;
     }
     if (num >= 10) 
-        writelargeint(num);
+        write_len += writelargeint(num);
     else
     {
         num += '0';
@@ -38,10 +41,7 @@ int writeuint(int num)
 
     write_len = 0;
     if (num < 0)
-    {
         num *= -1;
-        write_len = 1;
-    }
 
-    return(writeint(num) + write_len);
+    return(writeint(num));
 }

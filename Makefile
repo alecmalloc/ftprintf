@@ -1,6 +1,9 @@
-OBJFILES = writehex.o writeint.o writepercent.o writetext.o ft_printf.o main.o
+OBJFILES = writehex.o writeint.o writepercent.o writetext.o ft_printf.o
 
-all: writehex writeint writepercent writetext ft_printf main clean
+all: writehex writeint writepercent writetext ft_printf ar clean
+
+ar: 
+	ar rcs libftprintf.a $(OBJFILES)
 
 run: print_app
 	./print_app

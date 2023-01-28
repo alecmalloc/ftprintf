@@ -3,24 +3,26 @@
 int writehex(int hex, char hextype)
 {
     int write_len;
+
+    write_len = 0;
     if (hex >= 16)
     {
-        writehex(hex / 16, hextype);
-        writehex(hex % 16, hextype);
+        write_len += writehex(hex / 16, hextype);
+        write_len += writehex(hex % 16, hextype);
     }
     else
     {
         if (hex <= 9)
-            writechar(hex + '0');
+            write_len += writechar(hex + '0');
         else
         {
             if (hextype == 'x')
             {
-                writechar((hex - 10) + 'a');
+                write_len += writechar((hex - 10) + 'a');
             }
             else if (hextype == 'X')
             {
-                writechar((hex - 10) + 'A');
+                write_len += writechar((hex - 10) + 'A');
             }
         }
     }
