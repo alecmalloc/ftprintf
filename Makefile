@@ -1,31 +1,27 @@
-OBJFILES = writehex.o writeint.o writepercent.o writetext.o ft_printf.o
+SRCS		=	writehex.c writeint.c writepercent.c writetext.c ft_printf.c
 
-all: writehex writeint writepercent writetext ft_printf ar clean
+OBJS		=	${SRCS:.c=.o}
 
-ar: 
-	ar rcs libftprintf.a $(OBJFILES)
+HEADERS		=	libft.h
 
-run: print_app
-	./print_app
+NAME		=	libft.a
 
-clean:
-	rm -f $(OBJFILES)
+CFLAGS		=	-Wall -Wextra -Werror
 
-main: main.c
-	cc main.c -c
-	cc -o print_app $(OBJFILES)
+.c.o:		${HEADERS}
+			gcc ${CFLAGS} -I. -c $< -o ${<:.c=.o}
 
-ft_printf: ft_printf.c
-	cc ft_printf.c -c
+$(NAME):	${OBJS} ${HEADERS}
+			ar -rcs $@ $^
 
-writehex: writehex.c
-	cc writehex.c -c
+all:		${NAME}
 
-writeint: writeint.c
-	cc writeint.c -c
+clean:		
+			rm -f ${OBJS}
 
-writepercent: writepercent.c
-	cc writepercent.c -c
+fclean:		clean
+			rm -f ${NAME}
 
-writetext: writetext.c
-	cc writetext.c -c
+re:			fclean all
+
+.PHONY:		all clean fclean re
