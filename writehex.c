@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	writehex(int hex, char hextype)
+int	writehex(unsigned int hex, char hextype)
 {
 	int	write_len;
 
@@ -37,7 +37,7 @@ int	writehex(int hex, char hextype)
 	return (write_len);
 }
 
-int	writehexrouter(int hex, char hextype)
+int	writehexrouter(unsigned int hex, char hextype)
 {
 	int	write_len;
 

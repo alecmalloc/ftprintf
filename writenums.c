@@ -68,14 +68,21 @@ int	writeint(int num)
 	char	*str;
 
 	write_len = 0;
-	if (num < 0)
+	if (num == 0)
+		write_len += write(1, "0", 1);
+	else if (num == -2147483648)
+		write_len += write(1, "-2147483648", 11);
+	else
 	{
-		num *= -1;
-		write_len = write(1, "-", 1);
+		if (num < 0)
+		{
+			num *= -1;
+			write_len = write(1, "-", 1);
+		}
+		str = ft_itoa(num);
+		write_len += writestr(str);
+		free(str);
 	}
-	str = ft_itoa(num);
-	write_len += writestr(str);
-	free(str);
 	return (write_len);
 }
 

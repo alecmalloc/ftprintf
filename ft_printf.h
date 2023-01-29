@@ -23,8 +23,8 @@ int writeint(int num);
 int	writelargeint(int num);
 int	writechar(int c);
 int	writestr(char *str);
-int	writehexrouter(int hex, char hextype);
-int	writehex(int hex, char hextype);
+int	writehexrouter(unsigned int hex, char hextype);
+int	writehex(unsigned int hex, char hextype);
 int	ft_printf(const char *input, ...);
 int	writeptrrouter(unsigned long long ptr);
 
