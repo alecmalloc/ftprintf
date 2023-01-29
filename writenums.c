@@ -11,45 +11,88 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	writelargeint(int num)
+int	num_len(unsigned	int num)
 {
-	int	write_len;
+	int	len;
 
-	write_len = 0;
-	if (num >= 10)
+	len = 0;
+	while(num != 0)
 	{
-		write_len += writelargeint(num / 10);
-		write_len += writelargeint(num % 10);
+		len++;
+		num /= 10;
 	}
-	else
-		write_len += writechar(num + '0');
-	return (write_len);
+	return (len);
+}
+
+char	*ft_uitoa(unsigned int	num)
+{
+	char *str;
+	int len;
+
+	len = num_len(num);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (0);
+	str[len] = '\0';
+	while (num != 0)
+	{
+		str[len - 1] = num % 10 + '0';
+		num = num / 10;
+		len--;
+	}
+	return (str);
+}
+
+char	*ft_itoa(int	num)
+{
+	char *str;
+	int len;
+
+	len = num_len(num);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (0);
+	str[len] = '\0';
+	while (num != 0)
+	{
+		str[len - 1] = num % 10 + '0';
+		num = num / 10;
+		len--;
+	}
+	return (str);
 }
 
 int	writeint(int num)
 {
-	int	write_len;
+	int		write_len;
+	char	*str;
 
 	write_len = 0;
 	if (num < 0)
 	{
-		write_len += write(1, "-", 1);
 		num *= -1;
+		write_len = write(1, "-", 1);
 	}
-	if (num >= 10)
-		write_len += writelargeint(num);
-	else
-	{
-		num += '0';
-		write_len += write(1, &num, 1);
-	}
+	str = ft_itoa(num);
+	write_len += writestr(str);
+	free(str);
 	return (write_len);
 }
 
-int	writeuint(int num)
-{
-	if (num < 0)
-		num *= -1;
-	return (writeint(num));
+
+int	writeuint(unsigned	int num)
+{	
+	int write_len;
+	char *str;
+
+	write_len = 0;
+	if (num == 0)
+		write_len = write(1, "0", 1);
+	else
+	{
+		str = ft_uitoa(num);
+		write_len += writestr(str);
+		free(str);
+	}
+	return (write_len);
 }

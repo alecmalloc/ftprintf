@@ -15,15 +15,17 @@
 
 # include <stdarg.h>
 # include <unistd.h>
+# include <stdlib.h>
 
 int	writepercent(void);
-int	writeuint(int num);
-int	writeint(int num);
+int	writeuint(unsigned int num);
+int writeint(int num);
 int	writelargeint(int num);
 int	writechar(int c);
 int	writestr(char *str);
 int	writehexrouter(int hex, char hextype);
 int	writehex(int hex, char hextype);
 int	ft_printf(const char *input, ...);
+int	writeptrrouter(unsigned long long ptr);
 
 #endif

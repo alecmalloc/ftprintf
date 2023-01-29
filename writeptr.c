@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   writehex.c                                         :+:      :+:    :+:   */
+/*   writeptr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aeastman <aeastman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,39 +12,36 @@
 
 #include "ft_printf.h"
 
-int	writehex(int hex, char hextype)
+int	writeptr(unsigned long long ptr)
 {
 	int	write_len;
 
 	write_len = 0;
-	if (hex >= 16)
+	if (ptr >= 16)
 	{
-		write_len += writehex(hex / 16, hextype);
-		write_len += writehex(hex % 16, hextype);
+		write_len += writeptr(ptr / 16);
+		write_len += writeptr(ptr % 16);
 	}
 	else
 	{
-		if (hex <= 9)
-			write_len += writechar(hex + '0');
+		if (ptr <= 9)
+			write_len += writechar(ptr + '0');
 		else
-		{
-			if (hextype == 'x')
-				write_len += writechar(hex - 10 + 'a');
-			else if (hextype == 'X')
-				write_len += writechar(hex - 10 + 'A');
-		}
+			write_len += writechar(ptr - 10 + 'a');
 	}
 	return (write_len);
 }
 
-int	writehexrouter(int hex, char hextype)
+int	writeptrrouter(unsigned long long ptr)
 {
 	int	write_len;
 
 	write_len = 0;
-	if (hex == 0)
+	write_len += write(1, "0x", 2);
+
+	if (ptr == 0)
 		write_len += write(1, "0", 1);
 	else
-		write_len += writehex(hex, hextype);
+		write_len += writeptr(ptr);
 	return (write_len);
 }

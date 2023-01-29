@@ -4,3 +4,4 @@ main.c
 print_app
 *.o
 main.c
+printfTester

@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <unistd.h>
-
 #include "ft_printf.h"
 
 // resources and links
@@ -33,9 +30,11 @@ int	router(char letter, va_list args)
 	else if (letter == '%')
 		write_len += writepercent();
 	else if (letter == 'u')
-		write_len += writeuint(va_arg(args, int));
-	else if (letter == 'x' || letter == 'X' || letter == 'p')
+		write_len += writeuint(va_arg(args, unsigned int));
+	else if (letter == 'x' || letter == 'X')
 		write_len += writehexrouter(va_arg(args, int), letter);
+	else if (letter == 'p')
+		write_len += writeptrrouter(va_arg(args, unsigned long long));
 	return (write_len);
 }
 

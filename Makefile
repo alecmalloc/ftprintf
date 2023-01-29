@@ -1,4 +1,4 @@
-SRCS		=	writehex.c writeint.c writepercent.c writetext.c ft_printf.c
+SRCS		=	writehex.c writeptr.c writenums.c writepercent.c writetext.c ft_printf.c 
 
 OBJS		=	${SRCS:.c=.o}
 
@@ -26,6 +26,9 @@ test:
 			cc -c main.c
 			cc -o print_app ${OBJS} main.c
 			./print_app
+
+bb:
+			rm libftprintf.a
 
 re:			fclean all
 
