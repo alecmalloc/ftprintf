@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 int	num_len(unsigned	int num)
 {
 	int	len;
 
 	len = 0;
-	while(num != 0)
+	while (num != 0)
 	{
 		len++;
 		num /= 10;
@@ -24,10 +25,10 @@ int	num_len(unsigned	int num)
 	return (len);
 }
 
-char	*ft_uitoa(unsigned int	num)
+char	*ft_uitoa(unsigned int num)
 {
-	char *str;
-	int len;
+	char		*str;
+	int		len;
 
 	len = num_len(num);
 	str = (char *)malloc(sizeof(char) * (len + 1));
@@ -43,10 +44,10 @@ char	*ft_uitoa(unsigned int	num)
 	return (str);
 }
 
-char	*ft_itoa(int	num)
+char	*ft_itoa(int num)
 {
-	char *str;
-	int len;
+	char		*str;
+	int		len;
 
 	len = num_len(num);
 	str = (char *)malloc(sizeof(char) * (len + 1));
@@ -86,11 +87,10 @@ int	writeint(int num)
 	return (write_len);
 }
 
-
-int	writeuint(unsigned	int num)
+int	writeuint(unsigned int num)
 {	
-	int write_len;
-	char *str;
+	int		write_len;
+	char		*str;
 
 	write_len = 0;
 	if (num == 0)

@@ -19,7 +19,7 @@
 
 int	writepercent(void);
 int	writeuint(unsigned int num);
-int writeint(int num);
+int	writeint(int num);
 int	writelargeint(int num);
 int	writechar(int c);
 int	writestr(char *str);

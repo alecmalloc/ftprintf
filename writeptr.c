@@ -38,7 +38,6 @@ int	writeptrrouter(unsigned long long ptr)
 
 	write_len = 0;
 	write_len += write(1, "0x", 2);
-
 	if (ptr == 0)
 		write_len += write(1, "0", 1);
 	else
