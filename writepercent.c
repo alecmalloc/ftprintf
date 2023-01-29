@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   writepercent.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeastman <aeastman@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/29 12:13:53 by aeastman          #+#    #+#             */
+/*   Updated: 2023/01/29 12:14:26 by aeastman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int writepercent(void)
+int	writepercent(void)
 {
-    int write_len;
-    return(write(1, "%", 1));
+	return (write(1, "%", 1));
 }
