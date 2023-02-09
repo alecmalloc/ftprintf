@@ -27,7 +27,7 @@ int	num_len(unsigned	int num)
 
 char	*ft_uitoa(unsigned int num)
 {
-	char		*str;
+	char	*str;
 	int		len;
 
 	len = num_len(num);
@@ -46,7 +46,7 @@ char	*ft_uitoa(unsigned int num)
 
 char	*ft_itoa(int num)
 {
-	char		*str;
+	char	*str;
 	int		len;
 
 	len = num_len(num);
@@ -90,7 +90,7 @@ int	writeint(int num)
 int	writeuint(unsigned int num)
 {	
 	int		write_len;
-	char		*str;
+	char	*str;
 
 	write_len = 0;
 	if (num == 0)

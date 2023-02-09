@@ -24,6 +24,8 @@ int	writestr(char *str)
 
 	i = 0;
 	write_len = 0;
+	if (!str)
+		return (write(1, "(null)", 6));
 	while (str[i] != 0)
 	{
 		write_len += write(1, &str[i], 1);

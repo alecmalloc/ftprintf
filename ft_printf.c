@@ -6,7 +6,7 @@
 /*   By: aeastman <aeastman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 12:14:10 by aeastman          #+#    #+#             */
-/*   Updated: 2023/01/29 13:28:20 by aeastman         ###   ########.fr       */
+/*   Updated: 2023/02/09 13:52:50 by aeastman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_printf(const char *input, ...)
 {
 	int		i;
 	int		write_len;
-	va_list		args;
+	va_list	args;
 
 	va_start(args, input);
 	i = 0;

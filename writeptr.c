@@ -36,11 +36,10 @@ int	writeptrrouter(unsigned long long ptr)
 {
 	int	write_len;
 
+	if (!ptr)
+		return (write(1, "(nil)", 5));
 	write_len = 0;
 	write_len += write(1, "0x", 2);
-	if (ptr == 0)
-		write_len += write(1, "0", 1);
-	else
-		write_len += writeptr(ptr);
+	write_len += writeptr(ptr);
 	return (write_len);
 }
